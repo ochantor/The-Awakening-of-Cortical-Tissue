@@ -6,15 +6,14 @@
 
 ### 🔥 The Story Behind the Code
 
-It is widely accepted nowadays that mammalian intelligence, including human cognition, derives from cortical microcircuits—tiny groups of active neurons that cover the cortex and other brain areas. In that context, this work develops in-silico creatures or agents that form resilient, adaptive beings capable of executing complex space-time tasks without local memory, state machines, or explicit instructions, all by using artificial neuron models that closely follow biological microcircuits.
+It is widely accepted nowadays that mammalian intelligence, including human cognition, derives from cortical microcircuits (CMs) tiny groups of active neurons that cover the cortex and other brain areas. In that context, this work develops in-silico creatures or agents that form resilient, adaptive beings capable of executing complex space-time tasks without local memory, state machines, or explicit instructions, all by using artificial neuron models that closely follow biological microcircuits.
 
 In the previous repository We started with a minimal computational model of cortical microcircuits—tiny, repeating units that form the honeycomb of the mammalian neocortex. The goal was to test a simple idea from Dynamic Landscape Computation (DLC): that behavior does not need to be represented. It can emerge from local competition, rotation, and persistence.
 
-The creature moved, ate, avoided predators, and sought shelter. All without a single policy, reward function, or behavior tree.
-
+The creature moved, ate, avoided predators, and sought shelter. All without a single policy, reward function, or state machine—only delimited areas of pro-active CMs doing their job.
 But then, things went even better.
 
-We introduced a third cortical area—N+2—with a longer decay time. It was meant to be just another layer. Instead, it became something more. It started as a scaffold to build a deeper feeling in the agent that could be called an instinct, one that awakens with age.
+We introduced a third cortical area N+2 with a longer decay time. It was not meant to be just another layer. Instead, it became something more. It started as a scaffold to build a deeper feeling in the agent that could be called an instinct, one that awakens with age.
 
 The creature didn’t just survive. It collected materials. It carried them to a specific location. It constructed a nest—a task that requires special space-time actions, far beyond the reach of the previous creature.
 

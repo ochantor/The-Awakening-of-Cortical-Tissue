@@ -1,10 +1,15 @@
+#  Program by Oscar Chang.    
+#  Ph.D,  AI researcher
 import matplotlib
 matplotlib.use('TkAgg')
 
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import winsound
+try:
+    import winsound
+except ImportError:
+    winsound = None  # no Windows: los Beep() ya están dentro de try/except
 from matplotlib.patches import Ellipse
 import sys
 import time
@@ -412,44 +417,33 @@ def calcular_motor_n2():
     angle_material = np.arctan2(vec_material[1], vec_material[0]) if np.linalg.norm(vec_material) > 0 else 0.0
     angle_nido = np.arctan2(vec_nido[1], vec_nido[0]) if np.linalg.norm(vec_nido) > 0 else 0.0
 
-    angle_edad = edad * 2 * np.pi
-    angle_instinto = instinto_construccion * 2 * np.pi
-    angle_buche = 0.0 if not tiene_brizna else np.pi
+    # NOTA: instinto_construccion ya NO se disfraza de "ángulo" (edad*2*pi no
+    # representa ninguna dirección real). Se usa como lo que es: un escalar
+    # que amplifica cuánto pesa el impulso de construir frente a otras cosas,
+    # igual que effective_hunger amplifica el drive de comida en MOT.
+    #
+    # tiene_brizna y material_activo siguen siendo lecturas de sensor binarias
+    # (biologicamente razonable: "¿mis mandíbulas sostienen algo?", "¿hay
+    # material a la vista ahora mismo?"). Lo que cambia es que ya NO ramifican
+    # en fórmulas de energía distintas -- entran como coeficientes 0/1 dentro
+    # de UNA sola expresión, igual que cualquier otro término sensorial.
+    carga_bin = 1.0 if tiene_brizna else 0.0
+    material_disponible = 1.0 if material_activo else 0.0
 
     energias = np.zeros(N)
 
     for i, cm in enumerate(cms_n2):
         material_align = np.cos(angle_material - cm["angle"]) if material_activo else 0.0
         nido_align = np.cos(angle_nido - cm["angle"])
-        edad_align = np.cos(angle_edad - cm["angle"])
-        instinto_align = np.cos(angle_instinto - cm["angle"])
-        buche_align = np.cos(angle_buche - cm["angle"])
 
-        if tiene_brizna:
-            energias[i] = (
-                cm["nido_weight"] * nido_align * 0.7 +
-                cm["descarga_weight"] * buche_align * 0.5 +
-                cm["material_weight"] * material_align * 0.1 +
-                instinto_construccion * 1.5 * instinto_align +
-                cm["explore"] * np.random.uniform(-1, 1)
-            )
-        else:
-            if material_activo:
-                energias[i] = (
-                    cm["material_weight"] * material_align * 0.8 +
-                    cm["carga_weight"] * (1.0 - buche_align) * 0.5 +
-                    cm["nido_weight"] * nido_align * 0.1 +
-                    instinto_construccion * 1.5 * instinto_align +
-                    cm["explore"] * np.random.uniform(-1, 1)
-                )
-            else:
-                energias[i] = (
-                    cm["explore"] * np.random.uniform(0.5, 1.5) +
-                    instinto_construccion * 1.0 * instinto_align
-                )
-
-        if build_despierto:
-            energias[i] *= (1.0 + instinto_construccion * 0.5)
+        energias[i] = (
+            (1 - carga_bin) * material_disponible * cm["material_weight"] * material_align * (0.8 + 0.5 * instinto_construccion)
+            + carga_bin * cm["nido_weight"] * nido_align * (0.7 + 0.5 * instinto_construccion)
+            + carga_bin * cm["material_weight"] * material_align * 0.1
+            + (1 - carga_bin) * material_disponible * cm["nido_weight"] * nido_align * 0.1
+            + (1 - carga_bin) * (1 - material_disponible) * cm["explore"] * np.random.uniform(0.5, 1.5) * (0.3 + instinto_construccion)
+            + cm["explore"] * np.random.uniform(-1, 1)
+        )
 
     winner_n2 = np.argmax(energias)
 
@@ -533,27 +527,50 @@ def update(frame):
     danger += 0.003 * TIME_WARP  # <--- ANTES: 0.006
     danger = np.clip(danger, 0, 1)
 
-    in_cave_repose = False
-    if dist_home < 0.25:
-        if hunger > 0.40:
-            in_cave_repose = False
-            effective_hunger = hunger
-            current_safety_need = 0.0
-        else:
-            in_cave_repose = True
-            effective_hunger = 0.0
-            current_safety_need = 1.0
-    else:
-        if safety > 0.80:
-            attenuation = (1.0 - safety) / 0.20
-            effective_hunger = hunger * np.clip(attenuation, 0, 1)
-            current_safety_need = safety * 1.8
-        elif hunger > 0.50 and safety < 0.40:
-            effective_hunger = hunger * 1.5
-            current_safety_need = safety * 0.3
-        else:
-            effective_hunger = hunger
-            current_safety_need = safety
+    # ========================================================
+    # GATING HOMEOSTÁTICO - versión continua (sin ramas if/elif)
+    # ========================================================
+    # Antes esto era un árbol de 4 casos (dist_home</>=0.25, hunger>/<0.40,
+    # safety>/<0.80, etc.), cada uno con su propia fórmula -- exactamente el
+    # mismo problema que ya corregimos en N+2. Aquí se reemplaza por
+    # compuertas suaves (sigmoides) que hacen lo mismo de forma continua:
+    # a los mismos valores de corte, el resultado es prácticamente idéntico,
+    # pero ya no hay una rama discreta seleccionando la fórmula.
+    def _compuerta(x, filo=30.0):
+        return 1.0 / (1.0 + np.exp(-filo * x))
+
+    compuerta_en_casa = _compuerta(0.25 - dist_home)          # ~1 si dist_home << 0.25
+    compuerta_poco_hambre = _compuerta(0.40 - hunger)          # ~1 si hunger << 0.40
+    compuerta_seguridad_alta = _compuerta(safety - 0.80)       # ~1 si safety >> 0.80
+    compuerta_urgencia = _compuerta(hunger - 0.50) * _compuerta(0.40 - safety)  # ~1 si hambriento y sin seguridad
+
+    # Caso "lejos de casa": las tres fórmulas viejas, mezcladas por compuertas
+    atenuacion = np.clip((1.0 - safety) / 0.20, 0, 1)
+    eh_atenuado = hunger * atenuacion
+    sn_atenuado = safety * 1.8
+    eh_urgente = hunger * 1.5
+    sn_urgente = safety * 0.3
+    eh_plano = hunger
+    sn_plano = safety
+
+    peso_atenuado = compuerta_seguridad_alta
+    peso_urgente = compuerta_urgencia * (1.0 - peso_atenuado)
+    peso_plano = np.clip(1.0 - peso_atenuado - peso_urgente, 0, 1)
+
+    effective_hunger_lejos = peso_atenuado * eh_atenuado + peso_urgente * eh_urgente + peso_plano * eh_plano
+    current_safety_need_lejos = peso_atenuado * sn_atenuado + peso_urgente * sn_urgente + peso_plano * sn_plano
+
+    # Mezcla final: en_casa_activo (en casa, todavía con hambre) / en_casa_reposo / lejos
+    en_casa_activo = compuerta_en_casa * (1.0 - compuerta_poco_hambre)
+    reposo_intensidad = compuerta_en_casa * compuerta_poco_hambre   # reemplaza al booleano in_cave_repose
+    lejos = 1.0 - compuerta_en_casa
+
+    effective_hunger = en_casa_activo * hunger + lejos * effective_hunger_lejos
+    current_safety_need = reposo_intensidad * 1.0 + lejos * current_safety_need_lejos
+
+    # in_cave_repose se conserva como lectura informativa (para el texto en
+    # pantalla), pero ya no gobierna ninguna fórmula por sí sola.
+    in_cave_repose = reposo_intensidad > 0.5
 
     # ========================================================
     # 3. EDAD E INSTINTO
@@ -580,7 +597,8 @@ def update(frame):
         if tiempo_sin_construir > 60:
             urgencia_constructiva += 0.01 * TIME_WARP
 
-        urgencia_constructiva = max(urgencia_constructiva, 0.5)
+        # Sin piso artificial: si el nido avanza y no hay urgencia acumulada,
+        # esto puede bajar de verdad en vez de quedar forzado en 0.5.
         urgencia_constructiva = np.clip(urgencia_constructiva, 0, 1.5)
 
     # ========================================================
@@ -669,7 +687,9 @@ def update(frame):
         if tiempo_sin_construir > 50:
             impulso_construir += 0.01 * TIME_WARP
 
-        impulso_construir = max(impulso_construir, 0.4)
+        # Sin piso artificial de 0.4: se deja que decaiga de verdad cuando
+        # no hay señales que lo sostengan (sin material activo, sin brizna,
+        # sin progreso reciente).
 
     impulso_construir = np.clip(impulso_construir, 0, 1)
 
@@ -698,8 +718,8 @@ def update(frame):
         actualizar_nido()
         construccion_activa = True
         tiempo_sin_construir = 0.0
-        # === AJUSTE: Casi no baja el impulso ===
-        impulso_construir = np.clip(impulso_construir - 0.005, 0.6, 1)  # <--- ANTES: 0.02, 0.4
+        # Baja de verdad tras depositar, en vez de quedar forzado en [0.6, 1]
+        impulso_construir = np.clip(impulso_construir - 0.05, 0.0, 1.0)
 
     if dist_material > 0.15 and material_lock:
         material_lock = False
@@ -786,16 +806,16 @@ def update(frame):
         activity_mot *= (0.92 ** TIME_WARP)
         activity_mot[winner_mot] += 1.0
 
-        if in_cave_repose:
-            activity_nav *= (0.70 ** TIME_WARP)
-            if np.random.uniform(0, 1) < 0.40:
-                num_destellos = np.random.choice([1, 2])
-                indices_suertudos = np.random.choice(N, size=num_destellos, replace=False)
-                brillo_destello = 0.65 + 0.25 * np.sin(frame * 0.2)
-                activity_nav[indices_suertudos] += brillo_destello
-        else:
-            activity_nav *= (0.90 ** TIME_WARP)
-            activity_nav[winner_nav] += 1.0
+        # Antes esto era "if in_cave_repose: ... else: ...". Ahora se mezcla
+        # continuamente con reposo_intensidad (0 a 1), sin rama discreta.
+        tasa_decay_nav = 0.70 + 0.20 * (1.0 - reposo_intensidad)
+        activity_nav *= (tasa_decay_nav ** TIME_WARP)
+        activity_nav[winner_nav] += (1.0 - reposo_intensidad) * 1.0
+        if np.random.uniform(0, 1) < 0.40 * reposo_intensidad:
+            num_destellos = np.random.choice([1, 2])
+            indices_suertudos = np.random.choice(N, size=num_destellos, replace=False)
+            brillo_destello = (0.65 + 0.25 * np.sin(frame * 0.2)) * reposo_intensidad
+            activity_nav[indices_suertudos] += brillo_destello
     else:
         activity_mot[:] = 0.0
         activity_mot[winner_mot] = 1.0
@@ -859,9 +879,8 @@ def update(frame):
     if mag > 0:
         theta = np.arctan2(motor[1], motor[0])
         # === AJUSTE: Criatura más rápida ===
-        speed = (0.04 + 0.04 * np.clip(mag, 0, 1)) * TIME_WARP  # <--- ANTES: 0.03
-        if not in_cave_repose:
-            pos += speed * motor
+        speed = (0.04 + 0.04 * np.clip(mag, 0, 1)) * TIME_WARP * (1.0 - reposo_intensidad)
+        pos += speed * motor
 
     pos = np.clip(pos, -0.95, 0.95)
 
@@ -938,26 +957,21 @@ def update(frame):
 # ============================================================
 
 print("=" * 60)
-print("🐝 CREATURE DEEPY BEE N+2 - VERSIÓN DEFINITIVA")
+print("🐝 CREATURE DEEPY BEE N+2")
 print("=" * 60)
 print("🔬 Áreas corticales:")
 print("   - MOT: Motivacional (necesidades) - ARRIBA IZQUIERDA")
-print("   - NAV: Navegación (espacio) - ARRIBA DERECHA")
-print("   - N+2: Constructiva (MÚLTIPLES PESOS) - CENTRO ABAJO")
+print("   - NAV: Navegación (bordes) - ARRIBA DERECHA")
+print("   - N+2: Constructiva (recolectar/depositar) - CENTRO ABAJO")
 print("")
-print("🎯 La criatura construirá un nido de 3x3")
-print("📦 Materiales necesarios: 9 briznas")
-print("")
-print("✅ MEJORAS PARA COMPLETAR EL NIDO:")
-print("   - Hambre inicial reducida (0.7 → 0.3)")
-print("   - Hambre crece más lento (0.0028 → 0.0015)")
-print("   - Peligro crece más lento (0.006 → 0.003)")
-print("   - Impulso constructivo inicial más alto (0.6 → 0.8)")
-print("   - Urgencia constructiva más alta (0.8 → 1.2)")
-print("   - Más materiales disponibles (15 → 30)")
-print("   - N+2 tiene más peso (0.5 → 0.7)")
-print("   - Criatura más rápida (0.03 → 0.04)")
-print("   - El impulso apenas baja al depositar")
+print("🔧 Cambios retenidos de la revisión anterior (sin muro, sin memoria")
+print("   de bloqueo -- se quitaron para no introducir elementos nuevos")
+print("   antes de validar el resto):")
+print("   - Se quitó el truco de 'edad como ángulo' (edad*2*pi no representaba")
+print("     ninguna dirección real); instinto_construccion ahora es un escalar")
+print("     honesto que amplifica pesos, no una falsa geometría.")
+print("   - Se quitaron los pisos artificiales de impulso_construir y")
+print("     urgencia_constructiva: ahora pueden bajar de verdad.")
 print("")
 print("⏳ Iniciando simulación...")
 print("   (Cierra la ventana para terminar)")

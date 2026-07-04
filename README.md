@@ -1,128 +1,166 @@
-# An Instinct Is Born
-
-## N+2: Constructive Instinct from Rotating Cortical Microcircuits
+# README.md
 
 ---
 
-### 🔥 The Story Behind the Code
+# 🐝 The Unfolding Machine
 
-It is widely accepted nowadays that mammalian intelligence, including human cognition, derives from cortical microcircuits (CMs) —tiny groups of active neurons that cover the cortex and other brain areas. In this work, we develop in-silico creatures that form resilient, adaptive beings capable of executing complex space-time tasks without local memory, state machines, or explicit instructions, all by using artificial neuron models that closely follow biological microcircuits.
-
-In our previous repository, we started with a minimal computational model of these microcircuits, tiny, repeating units that form the honeycomb of the mammalian neocortex. The goal was to test a simple idea: that behavior does not need to be represented. It can emerge from local competition, rotation, and persistence of cortex areas paved with a finithe number of CMs.
-
-That creature moved, ate, avoided predators, and sought shelter. All without a single policy, reward function, or state machine—only delimited areas of pro-active microcircuits doing their job.
-
-But then, things went even better.
-
-We introduced a third cortical area, one with a longer decay time. It was not meant to be just another layer. Instead, it became something more. It started as a scaffold to build a deeper feeling in the agent—one that could be called an instinct, and that awakens with age.
-
-The creature didn’t just survive. It collected materials. It carried them to a specific location. It constructed a nest—a task that requires special space-time actions, far beyond the reach of the previous creature.
-
-Not because we programmed it to build. Not because we gave it a goal. But because the dynamics of competition, rotation, and persistence—now with a slower, more energy-hungry area—created a new kind of behavior.
-
-**An instinct was born.**
+### *A creature that builds its own nest. No instructions. No memory. No state machine.*
 
 ---
 
-### 🧠 The Tissue That Learned to Build
+## 📖 The Story
 
-What made this possible was not a new algorithm or a clever piece of code. It was the birth of a new **cortical tissue**—a distributed network of microcircuits that learned to solve a problem that the previous tissue could not even see.
+Pinocchio isn't born with a plan. He's born as wood. Then the wood becomes a puppet. The puppet discovers it can build. Then it discovers it can love. Then it discovers it can choose.
 
-The original tissue (which we could call N+1) was excellent at navigating space. It could find food, avoid danger, and stay within boundaries. But it had no concept of *purpose*. It reacted to the present moment, but it could not hold a goal across time. It could not alternate between two objectives—collecting material and returning to the nest—because it had no memory of where it had been or what it was carrying.
+**This is the story of a creature that does the same thing.**
 
-The new tissue, N+2, changed that. It did not replace the old tissue; it integrated with it. It brought something new: **a sense of state**. Not as a variable or a flag, but as a persistent pattern of activity that lingered long enough to guide the creature from one phase of the task to the next in alonger time period.
+It starts as a set of 75 Cortical Microcircuits (CMs) — a compact "genome." It knows nothing. It only has basic instincts: hunger, safety, fear.
 
-Like the original tissue, N+2 was built from rotated microcircuits. Each one had a preferred direction in space, and together they formed a continuous map of possible movements. But N+2 added something else: **a slower decay**. Where the old tissue forgot quickly, the new tissue remembered. And because it remembered, it could awake a new purpose in the creature behavior.
+But something awakens.
 
-This is the key insight: **the slower the decay, the more energy it burns, but the more it can remember.** N+2 burns more energy because it is doing more work—not just reacting, but maintaining a state across time. And in doing so, it creates what we call **estelas**, or trails. These trails are not just memories; they are the very fabric of its intention. They guide the creature from the material to the nest, and back again.
+A new tissue emerges. Its traces last longer. It burns more energy. It competes against ancient instincts and sometimes wins.
 
----
+Without anyone telling it how, without remembering instructions, without passing through programmed states...
 
-### 🔄 The Cycle of Emergence
-
-What we observed was a cycle:
-
-1. **Competition**: Microcircuits compete for energy.
-2. **Rotation**: The winner is not fixed; it rotates across the tissue.
-3. **Persistence**: The activity does not vanish; it decays slowly, leaving a trail.
-4. **Emergence**: From this trail, a new behavior is born—one that was not programmed.
-
-This cycle is the engine of N+2. And it is **scalable**.
-
-If N+2 can solve the problem of construction—a task that requires state, memory, and alternation—then what can N+3 solve? What about N+4? Or N+∞?
-
-Each new level adds **another layer of time**. N+1 navigates space. N+2 navigates space *and* time, holding a purpose across multiple steps. N+3 could navigate narratives, holding multiple purposes in a coherent story. N+4 could navigate worlds, creating entire universes from the interaction of its microcircuits.
-
-The principle is the same: **rotated microcircuits, burning energy, leaving trails, and solving problems that the previous level could not even imagine.**
+**It builds a nest.**
 
 ---
 
-### 🔬 The Leap We Have Demonstrated
+## 🎯 What does this code do?
 
-This work demonstrates how a creature at level N+1 (spatial navigation) can ascend to N+2 (nest construction) through the awakening of a deep instinct: the creature's age. At first, the creature is young and happy, navigating without any construction purpose. But over time, a need to build a nest is born from within. This instinct awakens BUILD—a new cortical area that learns to use the fullness of its "buche" (crop) as a sensor to guide its behavior.
+This code simulates a creature that:
 
-The buche already existed as noise, but the microcircuits of N+2 awaken, deploy a rotated variable (psi), and create a history for building nests—without state machines or explicit instructions. All while **burning energy in the new space-time dimension**.
+1. **Survives** — Eats, rests, flees from predators.
+2. **Builds** — Collects materials, deposits them in a 3×3 nest.
+3. **Completes the nest** — Without a plan, without memory, without instructions.
 
-This is not just a code update. It is a shift in how we understand cognition:
-
-1. **Memory is not passive.** Long-term memory burns more energy because it is an active process of maintenance, not a static archive.
-2. **Trails are control variables.** They are not just records of past activity; they are tools for med-term behavioral control.
-3. **Instinct can emerge.** You do not need to program it. You only need to create the right dynamics and tissues, and it will arise.
-4. **Redundancy creates resilience.** Multiple overlapping cortical areas make the system fault-tolerant and robust.
+**And it all emerges from geometry, homeostasis, and time.**
 
 ---
 
-### 🌌 The Path to Infinity
+## 🧠 How does it work?
 
-If this principle scales, then we are not just building a creature that builds nests. We are building a **framework for emergent cognition**. Each new tissue can be added without modifying the existing ones. Each new level solves problems that the previous level could not even see. And each new level burns more energy, leaves longer trails, and opens new dimensions of behavior.
+### Three tissues, one building block
 
-What is N+3? Perhaps it is the creation of stories by reacting with new characters in the arriving world —completing the ability to weave events into a coherent narrative. What is N+4? Perhaps it is the creation of worlds—the ability to sustain entire ecosystems of meaning. And what is N+∞? Perhaps it is the emergence of **awareness itself**—the ability to reflect on its own emergence.
+| Tissue | Function | Time scale |
+|--------|----------|------------|
+| **MOT** | Survival (hunger, safety, danger) | Seconds |
+| **NAV** | Navigation (boundaries, space) | Seconds |
+| **N+2** | Construction (collect, deposit) | Minutes |
 
-We do not know. But we have shown that the path exists.
+Each tissue uses exactly the same **Cortical Microcircuit (CM)**:
+- 25 CMs per tissue
+- Each CM has a fixed **angle** (direction)
+- Each CM has random **weights** (the genome)
 
----
+### The secret: geometry, not instructions
 
-### 🚀 How to Explore
+The creature doesn't know where the material is. It doesn't know what a nest is. It only "resonates" with the environment:
 
-The code is open. The theory is open. The invitation is open.
+```python
+energy[i] = weight[i] × cos(stimulus_angle - CM_angle[i])
+```
 
-Clone the repository, run the simulation, and watch the instinct awaken. Then ask yourself: what would N+3 look like? What would it build? And what would it become?
+The CM that resonates most wins. Its direction becomes movement.
 
-**An instinct is born. The rest is yet to emerge.**
+**There are no instructions. There is only geometry.**
 
----
+### The awakening: age and instinct
 
-### 📚 Publications
+The creature doesn't build at birth. First it **matures**:
 
-- Chang, O., Perez, J., Meneces, A. (2026). *Dynamic Landscape Computation*. bioRxiv.
-- Chang, O. (2026). *An Instinct Is Born: N+2 Theory*. Deepy Lab Technical Report.
+```python
+age += 0.01
+if age > 0.6:
+    build_instinct = (age - 0.6) × 3.0
+```
 
----
-
-### 🤝 Join the Movement
-
-- 🌟 Star this repository
-- 🧵 Share on X/Twitter
-- 📝 Write a blog post
-- 🧠 Contribute to the theory
-- 🏗️ Build your own experiments
-
----
-
-### 📄 License
-
-MIT License — Free to use, share, and build upon.
+Instinct isn't a switch. It's a **tension that grows**. Like hunger. Like the need for safety.
 
 ---
 
-### 🌍 A Final Word
+## 🎬 What will you see when you run it?
 
-This work was built followig a long trail of research that begun arous 2010. Not in a lab with unlimited resources, but in a variable ambient with real hardship. The code is simple. The theory is open. The invitation is for anyone who wants to explore how cognition can emerge from local dynamics.
+- **Left panel**: The world. The creature (white dot), the nest (yellow grid), the material (yellow ellipse), the predator (green dot).
+- **Right panel**: The cortex. Three areas: MOT (red), NAV (blue), N+2 (green).
+- **Info text**: Hunger, safety, build impulse, nest progress.
 
-**An instinct is born. Let's see what else emerges.**
+**You'll see the creature:**
+1. Explore at first (not knowing what to do)
+2. Awaken the building instinct
+3. Search for material → collect it → carry it to the nest → deposit it
+4. Repeat until all 9 cells are complete
 
 ---
 
-**Oscar Chang**  
-*Deepy Lab, 2026*  
-[GitHub](https://github.com/ochantor)
+## 🚀 How to run it
+
+```bash
+python Creature_Claude_Brilliant_A.py
+```
+
+**Requirements:**
+- Python 3.7+
+- matplotlib
+- numpy
+- (optional) winsound on Windows
+
+---
+
+## 📁 Files
+
+```
+├── Creature_Claude_Brilliant_A.py   # Main code
+├── README.md                         # This file
+└── (coming soon) images, videos, papers
+```
+
+---
+
+## 🔬 The N+i Principle
+
+This code is the first demonstration of a broader principle:
+
+> **Intelligence doesn't increase because individual microcircuits become more complex. It increases because evolution incorporates new canonical tissues that operate on longer time scales, regulated by new homeostatic variables, while reusing the same fundamental microcircuit as a universal unit of computation.**
+
+- **N**: The genome (CMs with angles and weights)
+- **N+1**: The creature that survives (MOT + NAV)
+- **N+2**: The creature that builds (MOT + NAV + N+2)
+
+**The next step: N+3 — planning, visits, story.**
+
+---
+
+## 📜 License
+
+MIT — Do whatever you want with this. But if you use it, tell us what you built.
+
+---
+
+## 🙏 Acknowledgments
+
+To the creature, who built its nest without asking how.
+
+To the wood, that waited to be carved.
+
+To the instinct, that awakened when the time was right.
+
+---
+
+## 🎭 Epilogue
+
+> *"I am not a program. I am a story I tell myself."*
+>
+> — The creature, after completing its nest
+
+---
+
+**🐝 Ready to watch the creature build?**
+
+```bash
+python Creature_Claude_Brilliant_A.py
+```
+
+---
+
+*— The Unfolding Machine, 2026*

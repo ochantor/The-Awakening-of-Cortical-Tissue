@@ -158,7 +158,7 @@ To the instinct, that awakened when the time was right.
 **🐝 Ready to watch the creature build?**
 
 ```bash
-python Creature_Claude_Brilliant_A.py
+python Creature_Brilliant_Nest.py
 ```
 
 ---

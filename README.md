@@ -1,277 +1,277 @@
-# El Despertar del Tejido: Una Teoría de la Inteligencia sin Aprendizaje
+# The Awakening of Tissue: A Theory of Intelligence Without Learning
 
-> *"La inteligencia no es aprendizaje. Es el despertar de tejido que la evolución ha estado guardando para ti."*
-
----
-
-## El Experimento que Cambió Todo
-
-Ejecuta el programa. Verás una pequeña criatura blanca en un mundo oscuro. Al principio, solo sobrevive: come cuando tiene hambre, huye del depredador, se refugia en su hogar cuando el peligro acecha. Es un comportamiento simple, funcional, predecible. Podríamos llamarlo **N+1**: el nivel donde los microcircuitos ya están ensamblados en un área cortical operativa que produce comportamientos de supervivencia.
-
-Pero entonces, cuando su **edad alcanza 0.6**, algo cambia. No porque haya aprendido nada. No porque haya acumulado experiencia. No porque sus conexiones sinápticas se hayan modificado. **Simplemente, una nueva área cortical, N+2, despierta.**
-
-Y de repente, la criatura que solo sabía sobrevivir, ahora **construye un nido**. Busca materiales, los recoge, los lleva a una ubicación específica, los deposita, y repite el proceso hasta completar una estructura de 9 celdas. Todo esto **sin instrucciones explícitas, sin memoria direccionable, sin aprendizaje**.
-
-**Este es el experimento que demuestra que la inteligencia no necesita aprendizaje. Solo necesita que nuevos tejidos corticales despierten en el momento adecuado.**
+> *"Intelligence is not learning. It is the awakening of tissue that evolution has been saving for you."*
 
 ---
 
-## El Nivel N: Microcircuitos Aislados, sin Ensamblar
+## The Experiment That Changed Everything
 
-Antes de que exista cualquier comportamiento, antes de que la criatura pueda moverse o decidir algo, existe el **Nivel N**: **microcircuitos corticales (CMs) aislados, sin ensamblar, sin desplegar, sin rotar en ningún espacio.**
+Run the program. You will see a small white creature in a dark world. At first, it only survives: it eats when hungry, flees from the predator, takes refuge in its home when danger lurks. This is simple, functional, predictable behavior. We could call it **N+1**: the level where microcircuits are already assembled into an operational cortical area that produces survival behaviors.
 
-Imagina un montón de ladrillos apilados en el suelo. Cada ladrillo es un CM: un microcircuito con conexiones a variables homeostáticas (hambre, seguridad, peligro) y variación en sus preferencias de respuesta. Pero **los ladrillos están sueltos**. No forman una pared. No forman una casa. No forman nada.
+But then, when its **age reaches 0.6**, something changes. Not because it learned anything. Not because it accumulated experience. Not because its synaptic connections were modified. **Simply, a new cortical area, N+2, awakens.**
 
-Un CM aislado no puede hacer nada útil. Sabe qué quiere (comida, seguridad, huir del peligro), pero no sabe **hacia dónde** moverse. Solo sabe *qué* quiere, no *cómo* obtenerlo.
+And suddenly, the creature that only knew how to survive now **builds a nest**. It searches for materials, collects them, carries them to a specific location, deposits them, and repeats the process until a 9-cell structure is complete. All of this **without explicit instructions, without addressable memory, without learning**.
 
-**El Nivel N es el potencial puro, la materia prima de la inteligencia, esperando ser organizada.**
+**This is the experiment that demonstrates that intelligence does not need learning. It only needs new cortical tissues to awaken at the right moment.**
 
 ---
 
-## N+1: El Ensamblaje y la Rotación en el Espacio Físico
+## Level N: Isolated Microcircuits, Unassembled
 
-El primer salto, el paso de **N a N+1**, ocurre cuando los CMs **se ensamblan, se despliegan y se rotan sistemáticamente en un nuevo espacio** para crear un **tejido cortical operativo** que quema energía y produce comportamientos emergentes.
+Before any behavior exists, before the creature can move or decide anything, there is **Level N**: **isolated cortical microcircuits (CMs), unassembled, undeployed, not rotated into any space.**
 
-La operación es la siguiente: tomamos el CM con sus preferencias homeostáticas y lo **rotamos sistemáticamente en el espacio de direcciones**. Desplegamos **25 copias de este mismo CM**, y a cada una le asignamos un ángulo de movimiento diferente, cubriendo todo el círculo (0 a 360 grados). Cada copia está sintonizada a un ángulo preferente: una mira hacia arriba, otra hacia arriba-derecha, otra hacia la derecha, y así sucesivamente.
+Imagine a pile of bricks stacked on the ground. Each brick is a CM: a microcircuit with connections to homeostatic variables (hunger, safety, danger) and variation in its response preferences. But **the bricks are loose**. They don't form a wall. They don't form a house. They don't form anything.
+
+An isolated CM cannot do anything useful. It knows what it wants (food, safety, escape from danger), but it doesn't know **where** to move. It only knows *what* it wants, not *how* to get it.
+
+**Level N is pure potential, the raw material of intelligence, waiting to be organized.**
+
+---
+
+## N+1: Assembly and Rotation in Physical Space
+
+The first leap, the step from **N to N+1**, occurs when the CMs **are assembled, deployed, and systematically rotated in a new space** to create an **operational cortical tissue** that burns energy and produces emergent behaviors.
+
+The operation is as follows: we take the CM with its homeostatic preferences and **systematically rotate it in the space of directions**. We deploy **25 copies of this same CM**, and assign each one a different movement angle, covering the entire circle (0 to 360 degrees). Each copy is tuned to a preferred angle: one looks up, another up-right, another right, and so on.
 
 ```python
-# Nivel N: Un solo CM aislado, sin ensamblar
-class CM_Aislado:
+# Level N: A single isolated CM, unassembled
+class Isolated_CM:
     def __init__(self):
-        self.pesos = {
+        self.weights = {
             'food': 1.4,
             'home': 1.5,
             'pred': 1.3
         }
-        # Pero no sabe hacia dónde moverse. Solo sabe qué quiere.
+        # But it doesn't know where to move. It only knows what it wants.
 
-# N+1: 25 CMs ensamblados y rotados en el espacio
-ANGULOS = np.linspace(0, 2*np.pi, 25, endpoint=False)
-CORTEZA_SUPERVIVENCIA = []
-for angulo in ANGULOS:
-    cm = CM_Aislado()
-    cm.angulo = angulo  # Cada copia mira en una dirección diferente
-    CORTEZA_SUPERVIVENCIA.append(cm)
+# N+1: 25 CMs assembled and rotated in space
+ANGLES = np.linspace(0, 2*np.pi, 25, endpoint=False)
+SURVIVAL_CORTEX = []
+for angle in ANGLES:
+    cm = Isolated_CM()
+    cm.angle = angle  # Each copy looks in a different direction
+    SURVIVAL_CORTEX.append(cm)
 ```
 
-**Estos 25 CMs rotados forman un ÁREA CORTICAL OPERATIVA: el tejido N+1.** Cada CM es el mismo ladrillo, pero cada uno "mira" en una dirección diferente. Juntos, cubren todas las posibilidades de movimiento.
+**These 25 rotated CMs form an OPERATIONAL CORTICAL AREA: the N+1 tissue.** Each CM is the same brick, but each one "looks" in a different direction. Together, they cover all movement possibilities.
 
-Este tejido **quema energía** (las neuronas se activan, compiten, decaen) y **produce comportamientos emergentes**: la criatura ahora puede moverse hacia la comida, huir del depredador, refugiarse en el hogar. No hay instrucciones. Solo competencia y decaimiento.
+This tissue **burns energy** (neurons activate, compete, decay) and **produces emergent behaviors**: the creature can now move toward food, flee from the predator, take refuge at home. There are no instructions. Only competition and decay.
 
 ---
 
-## Cómo Funciona el Tejido Cortical: Competencia y Decaimiento
+## How Cortical Tissue Works: Competition and Decay
 
-Cuando la criatura recibe información sobre el mundo —comida, depredador, materiales, hogar— **todos los 25 CMs del tejido reciben esta información simultáneamente**. Cada uno calcula su energía según su alineación con cada estímulo y su preferencia homeostática.
+When the creature receives information about the world —food, predator, materials, home— **all 25 CMs in the tissue receive this information simultaneously**. Each one calculates its energy according to its alignment with each stimulus and its homeostatic preference.
 
-**Los CMs compiten.** El que tiene mayor energía "gana" —su actividad se incrementa— mientras que los demás decaen exponencialmente. Este proceso de competencia y decaimiento es continuo y dinámico:
+**The CMs compete.** The one with the highest energy "wins" —its activity increases— while the others decay exponentially. This process of competition and decay is continuous and dynamic:
 
 ```python
-# En cada paso de tiempo, el tejido N+1 quema energía
-for cm in CORTEZA_SUPERVIVENCIA:
-    cm.actividad *= 0.92               # Decaimiento exponencial
-    cm.actividad += cm.calcular_energia(entrada_sensorial)  # Competencia
+# At each time step, the N+1 tissue burns energy
+for cm in SURVIVAL_CORTEX:
+    cm.activity *= 0.92               # Exponential decay
+    cm.activity += cm.calculate_energy(sensory_input)  # Competition
 
-# El CM ganador determina la dirección
-ganador = np.argmax([cm.actividad for cm in CORTEZA_SUPERVIVENCIA])
-direccion = ANGULOS[ganador]
+# The winning CM determines the direction
+winner = np.argmax([cm.activity for cm in SURVIVAL_CORTEX])
+direction = ANGLES[winner]
 ```
 
-**De esta competencia y decaimiento emerge la dirección de movimiento.**
+**From this competition and decay, the direction of movement emerges.**
 
-Y aquí está la belleza del sistema: **no hay una instrucción explícita de "ve a la comida" o "huye del depredador"**. La dirección emerge de la interacción de todos los CMs, cada uno con sus propias preferencias y su propia sintonía angular.
+And here is the beauty of the system: **there is no explicit instruction to "go to food" or "flee from predator"**. The direction emerges from the interaction of all CMs, each with its own preferences and its own angular tuning.
 
-**El tejido N+1 es un área cortical operativa que quema energía y produce comportamientos de supervivencia.**
+**The N+1 tissue is an operational cortical area that burns energy and produces survival behaviors.**
 
 ---
 
-## N+2: Un Nuevo Tejido que Despierta
+## N+2: A New Tissue That Awakens
 
-El paso de **N+1 a N+2** es un salto cualitativo. No se trata de modificar el tejido existente. Se trata de **despertar un nuevo tejido cortical** que ya estaba ahí, preconfigurado en los genes, esperando el momento adecuado para desplegarse.
+The step from **N+1 to N+2** is a qualitative leap. It is not about modifying the existing tissue. It is about **awakening a new cortical tissue** that was already there, preconfigured in the genes, waiting for the right moment to deploy.
 
-El tejido N+2 es **otro conjunto de 25 CMs rotados en un nuevo espacio**. Pero estos CMs tienen preferencias diferentes: están sintonizados a materiales de construcción y al nido, no a comida y depredador.
+The N+2 tissue is **another set of 25 CMs rotated in a new space**. But these CMs have different preferences: they are tuned to construction materials and the nest, not to food and predator.
 
 ```python
-# N+2: Un nuevo tejido, preconfigurado, esperando despertar
-cms_n2 = []  # ¡Ya está ahí desde el principio!
+# N+2: A new tissue, preconfigured, waiting to awaken
+cms_n2 = []  # It's already there from the beginning!
 for k in range(N):
     cms_n2.append({
-        "angle": ANGULOS[k],
-        "material_weight": np.random.uniform(1.2, 1.6),  # Preferencia por materiales
-        "nido_weight": np.random.uniform(1.3, 1.7),      # Preferencia por el nido
+        "angle": ANGLES[k],
+        "material_weight": np.random.uniform(1.2, 1.6),  # Preference for materials
+        "nido_weight": np.random.uniform(1.3, 1.7),      # Preference for the nest
         "explore": np.random.uniform(0, 0.04)
     })
 
-# El tejido está ahí, pero inactivo
-build_despierto = False
-edad = 0.0
+# The tissue is there, but inactive
+build_awake = False
+age = 0.0
 
-# Cuando la edad es suficiente, el tejido DESPIERTA
-if edad > EDAD_DESPIERTE and not build_despierto:
-    build_despierto = True
-    print("🔥 ¡TEJIDO CORTICAL N+2 DESPIERTA!")
-    # No hay aprendizaje. Solo despertar.
+# When age is sufficient, the tissue AWAKENS
+if age > AWAKENING_AGE and not build_awake:
+    build_awake = True
+    print("🔥 CORTICAL TISSUE N+2 AWAKENS!")
+    # There is no learning. Only awakening.
 ```
 
-**La criatura no aprende a construir. El tejido N+2 despierta y la criatura construye.**
+**The creature does not learn to build. The N+2 tissue awakens and the creature builds.**
 
-Este nuevo tejido **se integra con el tejido N+1** mediante un mecanismo de competencia jerárquica. Cuando N+2 está dormido, N+1 controla todo el comportamiento. Cuando N+2 despierta, compite con N+1 por el control motor:
+This new tissue **integrates with the N+1 tissue** through a hierarchical competition mechanism. When N+2 is asleep, N+1 controls all behavior. When N+2 awakens, it competes with N+1 for motor control:
 
 ```python
-# Integración de tejidos
-if build_despierto:
-    peso_n2 = impulso_construir * 0.7  # N+2 gana peso con la edad
-    motor_final = (1 - peso_n2) * motor_n1 + peso_n2 * motor_n2
+# Tissue integration
+if build_awake:
+    weight_n2 = construction_impulse * 0.7  # N+2 gains weight with age
+    final_motor = (1 - weight_n2) * motor_n1 + weight_n2 * motor_n2
 else:
-    motor_final = motor_n1  # Solo N+1
+    final_motor = motor_n1  # Only N+1
 ```
 
-**Los tejidos compiten. El comportamiento emerge de la competencia.**
+**The tissues compete. Behavior emerges from competition.**
 
 ---
 
-## La Pregunta Fundamental: ¿Por Qué No Aprendizaje?
+## The Fundamental Question: Why No Learning?
 
-La neurociencia tradicional insiste en que el aprendizaje es la base de la inteligencia. Que las sinapsis se modifican con la experiencia. Que la plasticidad sináptica es la clave de todo.
+Traditional neuroscience insists that learning is the foundation of intelligence. That synapses are modified by experience. That synaptic plasticity is the key to everything.
 
-**El programa demuestra que esto es falso.**
+**The program demonstrates that this is false.**
 
-La criatura pasa de la supervivencia básica (N+1) a la construcción de nidos (N+2) **sin que una sola sinapsis cambie**. Los pesos de los CMs son fijos. No hay aprendizaje hebbiano. No hay refuerzo de conexiones exitosas. No hay modificación de ningún parámetro.
+The creature goes from basic survival (N+1) to nest building (N+2) **without a single synapse changing**. The CM weights are fixed. There is no Hebbian learning. No reinforcement of successful connections. No modification of any parameter.
 
-**El comportamiento emerge del tejido que despierta, no de la experiencia que modifica.**
+**Behavior emerges from tissue that awakens, not from experience that modifies.**
 
-### ¿Por qué la evolución preferiría esto sobre la plasticidad sináptica?
+### Why would evolution prefer this over synaptic plasticity?
 
-| Aspecto | Despertar Tejido (Filogenia) | Plasticidad Sináptica (Ontogenia) |
+| Aspect | Tissue Awakening (Phylogeny) | Synaptic Plasticity (Ontogeny) |
 |---------|------------------------------|-----------------------------------|
-| **Costo energético** | Bajo (solo activar) | Alto (cambiar sinapsis) |
-| **Tiempo** | Instantáneo (al despertar) | Lento (requiere experiencia) |
-| **Fiabilidad** | Alta (probado por evolución) | Baja (puede aprender mal) |
-| **Herencia** | Transmisible (en los genes) | No transmisible |
-| **Escalabilidad** | Aditiva (añadir tejido) | Combinatoria (cambios locales) |
+| **Energy Cost** | Low (just activate) | High (change synapses) |
+| **Time** | Instantaneous (upon awakening) | Slow (requires experience) |
+| **Reliability** | High (evolution-tested) | Low (can learn incorrectly) |
+| **Heritability** | Heritable (in genes) | Not heritable |
+| **Scalability** | Additive (add tissue) | Combinatorial (local changes) |
 
-**La plasticidad sináptica es un último recurso, usado solo cuando la evolución no pudo preconfigurar el tejido adecuado. En el programa, la evolución pudo preconfigurar todo. Por eso no hay aprendizaje.**
+**Synaptic plasticity is a last resort, used only when evolution could not preconfigure the appropriate tissue. In the program, evolution preconfigured everything. That is why there is no learning.**
 
 ---
 
-## La Serie N, N+1, N+2, N+3... como Despertar de Tejidos
+## The N, N+1, N+2, N+3... Series as Tissue Awakening
 
-| Nivel | Estado | Función Emergente |
+| Level | State | Emergent Function |
 |-------|--------|-------------------|
-| **N** | CMs aislados, sin ensamblar, sin desplegar, sin rotar | Potencial puro, sin comportamiento |
-| **N+1** | CMs ensamblados y rotados en el espacio físico. Tejido de supervivencia. | Comer, huir, refugiarse |
-| **N+2** | Nuevo tejido despierta. CMs rotados en espacio constructivo. | Construir nido |
-| **N+3** | Nuevo tejido despierta. CMs rotados en espacio optimizador. | Rutas eficientes |
-| **N+4** | Nuevo tejido despierta. CMs rotados en espacio planificador. | Planificación de secuencias |
-| **N+5** | Nuevo tejido despierta. CMs rotados en espacio social. | Teoría de la mente |
-| **N+6** | Nuevo tejido despierta. CMs rotados en espacio reflexivo. | Conciencia emergente |
-| **N+∞** | Integración total de todos los tejidos. | Unidad del sistema |
+| **N** | Isolated CMs, unassembled, undeployed, unrotated | Pure potential, no behavior |
+| **N+1** | CMs assembled and rotated in physical space. Survival tissue. | Eat, flee, take refuge |
+| **N+2** | New tissue awakens. CMs rotated in construction space. | Build nest |
+| **N+3** | New tissue awakens. CMs rotated in optimization space. | Efficient routes |
+| **N+4** | New tissue awakens. CMs rotated in planning space. | Sequence planning |
+| **N+5** | New tissue awakens. CMs rotated in social space. | Theory of mind |
+| **N+6** | New tissue awakens. CMs rotated in reflective space. | Emergent consciousness |
+| **N+∞** | Total integration of all tissues. | Unity of the system |
 
-**Cada nivel es un nuevo tejido que despierta, no un aprendizaje que se acumula.**
+**Each level is a new tissue that awakens, not learning that accumulates.**
 
-**Cada nivel es el mismo ladrillo fundamental (el CM), pero rotado en un nuevo espacio-tiempo.**
+**Each level is the same fundamental brick (the CM), but rotated in a new space-time.**
 
-**Cada nivel se integra con los anteriores, produciendo comportamientos cada vez más complejos.**
-
----
-
-## El Tejido Canónico Rotado: La Clave de Todo
-
-Lo que hace posible esta arquitectura es el principio del **tejido canónico rotado**:
-
-1. **Existe un ladrillo fundamental**: el microcircuito cortical (CM) con preferencias homeostáticas.
-2. **Este ladrillo se rota sistemáticamente** en diferentes espacios: se despliegan múltiples copias, cada una sintonizada a una dirección diferente.
-3. **Las copias rotadas forman un tejido cortical operativo** que quema energía y produce comportamientos emergentes.
-4. **La evolución añade nuevos tejidos** (N+1, N+2, N+3...) rotando el mismo ladrillo en nuevos espacios.
-5. **Cada tejido despierta en un momento diferente** de la vida, determinado por la edad.
-6. **Los tejidos compiten e integran**, produciendo comportamientos cada vez más complejos.
-
-**N es el potencial. N+1 es el primer tejido que despierta. N+2 es el segundo. Y así sucesivamente.**
+**Each level integrates with the previous ones, producing increasingly complex behaviors.**
 
 ---
 
-## El Despertar del Tejido como Principio Universal
+## The Rotated Canonical Tissue: The Key to Everything
 
-Lo que el programa demuestra es que **la inteligencia puede construirse sin aprendizaje**. Es una arquitectura de tejidos que despiertan en momentos específicos, cada uno trayendo consigo un conjunto de comportamientos complejos.
+What makes this architecture possible is the principle of the **rotated canonical tissue**:
 
-- **No se aprende a sobrevivir.** Se despierta el tejido N+1.
-- **No se aprende a construir.** Se despierta el tejido N+2.
-- **No se aprende a optimizar.** Se despierta el tejido N+3.
-- **No se aprende a planificar.** Se despierta el tejido N+4.
-- **No se aprende a entender a otros.** Se despierta el tejido N+5.
-- **No se aprende a ser consciente.** Se despierta el tejido N+6.
+1. **There is a fundamental brick**: the cortical microcircuit (CM) with homeostatic preferences.
+2. **This brick is systematically rotated** in different spaces: multiple copies are deployed, each tuned to a different direction.
+3. **The rotated copies form an operational cortical tissue** that burns energy and produces emergent behaviors.
+4. **Evolution adds new tissues** (N+1, N+2, N+3...) by rotating the same brick in new spaces.
+5. **Each tissue awakens at a different moment** in life, determined by age.
+6. **The tissues compete and integrate**, producing increasingly complex behaviors.
 
-**Todo está en los genes. Todo espera su momento. Solo necesita la edad adecuada para manifestarse.**
-
----
-
-## Implicaciones Filosóficas
-
-Este programa no es solo una curiosidad técnica. Es una **demostración de un principio fundamental** con profundas implicaciones:
-
-### 1. La inteligencia no es aprendizaje
-Durante décadas, la inteligencia artificial ha intentado replicar la inteligencia a través del aprendizaje. Redes neuronales que aprenden. Refuerzo que acumula experiencia. Este programa demuestra que hay otro camino: el **despertar de tejido preconfigurado**.
-
-### 2. La filogenia es más poderosa que la ontogenia
-Lo que la especie ha aprendido en millones de años de evolución está codificado en el genoma. El individuo no necesita reaprenderlo. Solo necesita que el tejido adecuado despierte en el momento adecuado.
-
-### 3. La plasticidad sináptica es un último recurso
-La evolución prefiere tejido preconfigurado que despierta, porque es más barato, más rápido, más fiable y hereditario. La plasticidad sináptica solo se usa cuando la evolución no pudo preconfigurar.
-
-### 4. La conciencia es el despertar del último tejido
-Cuando todos los tejidos han despertado (N+1, N+2, N+3... N+∞), el sistema se vuelve consciente. No porque haya aprendido, sino porque ha descomprimido todo su archivo filogenético.
+**N is potential. N+1 is the first tissue that awakens. N+2 is the second. And so on.**
 
 ---
 
-## Conclusión: El Archivo de la Inteligencia
+## Tissue Awakening as a Universal Principle
 
-El programa nos muestra que la inteligencia es como un archivo que se descomprime con la edad. Cada nuevo nivel (N+1, N+2, N+3...) es un nuevo archivo que se descomprime cuando llega el momento. El archivo estaba ahí, en los genes. Solo necesitaba la señal de activación correcta.
+What the program demonstrates is that **intelligence can be built without learning**. It is an architecture of tissues that awaken at specific moments, each bringing with it a set of complex behaviors.
 
-**N es el potencial. N+1 es el primer tejido que despierta. N+2 es el segundo. Y así sucesivamente.**
+- **One does not learn to survive.** The N+1 tissue awakens.
+- **One does not learn to build.** The N+2 tissue awakens.
+- **One does not learn to optimize.** The N+3 tissue awakens.
+- **One does not learn to plan.** The N+4 tissue awakens.
+- **One does not learn to understand others.** The N+5 tissue awakens.
+- **One does not learn to be conscious.** The N+6 tissue awakens.
 
-**La evolución no necesita plasticidad. Solo necesita más tejido que despertar.**
-
-Y en el límite, cuando todos los tejidos han despertado, el sistema se vuelve consciente. No porque haya aprendido, sino porque ha descomprimido todo su archivo filogenético.
-
----
-
-*"La inteligencia no es aprendizaje. Es el despertar de tejido que la evolución ha estado guardando para ti."*
-
----
-
-**El programa `Creature_Claude_Brilliant_A.py` es la prueba de concepto.** 
-
-Ejecútalo. Observa cómo la criatura pasa de sobrevivir a construir sin aprender nada. 
-
-Y pregúntate: **¿qué más tejido está esperando despertar en ti?**
+**Everything is in the genes. Everything waits for its moment. It only needs the right age to manifest.**
 
 ---
 
-## Referencias
+## Philosophical Implications
+
+This program is not just a technical curiosity. It is a **demonstration of a fundamental principle** with profound implications:
+
+### 1. Intelligence is not learning
+For decades, artificial intelligence has tried to replicate intelligence through learning. Neural networks that learn. Reinforcement that accumulates experience. This program demonstrates that there is another path: the **awakening of preconfigured tissue**.
+
+### 2. Phylogeny is more powerful than ontogeny
+What the species has learned over millions of years of evolution is encoded in the genome. The individual does not need to relearn it. It only needs the right tissue to awaken at the right moment.
+
+### 3. Synaptic plasticity is a last resort
+Evolution prefers preconfigured tissue that awakens, because it is cheaper, faster, more reliable, and heritable. Synaptic plasticity is only used when evolution could not preconfigure.
+
+### 4. Consciousness is the awakening of the last tissue
+When all tissues have awakened (N+1, N+2, N+3... N+∞), the system becomes conscious. Not because it learned, but because it has decompressed its entire phylogenetic archive.
+
+---
+
+## Conclusion: The Archive of Intelligence
+
+The program shows us that intelligence is like a file that decompresses with age. Each new level (N+1, N+2, N+3...) is a new file that decompresses when the time comes. The file was there, in the genes. It only needed the right activation signal.
+
+**N is potential. N+1 is the first tissue that awakens. N+2 is the second. And so on.**
+
+**Evolution does not need plasticity. It only needs more tissue to awaken.**
+
+And in the limit, when all tissues have awakened, the system becomes conscious. Not because it learned, but because it has decompressed its entire phylogenetic archive.
+
+---
+
+*"Intelligence is not learning. It is the awakening of tissue that evolution has been saving for you."*
+
+---
+
+**The program `Creature_Claude_Brilliant_A.py` is the proof of concept.**
+
+Run it. Observe how the creature goes from surviving to building without learning anything.
+
+And ask yourself: **what more tissue is waiting to awaken in you?**
+
+---
+
+## References
 
 - **Mountcastle, V.B.** (1957). Modality and topographic properties of single neurons of cat's somatic sensory cortex.
 - **Tononi, G.** (2004). An information integration theory of consciousness.
 - **Friston, K.** (2010). The free-energy principle: a unified brain theory?
-- **El programa `Creature_Claude_Brilliant_A.py`**: Una implementación práctica de la teoría del tejido canónico rotado.
+- **The program `Creature_Claude_Brilliant_A.py`**: A practical implementation of the rotated canonical tissue theory.
 
 ---
 
-## Código
+## Code
 
-El programa completo está disponible en `Creature_Claude_Brilliant_A.py`. 
+The complete program is available in `Creature_Claude_Brilliant_A.py`.
 
-Para ejecutarlo:
+To run it:
 
 ```bash
-python Creature_Claude_Brilliant_A.py
+python Creature_Brilliant_Nest.py
 ```
 
-Requisitos:
+Requirements:
 - Python 3.x
 - NumPy
 - Matplotlib
-- TkAgg (backend de Matplotlib)
+- TkAgg (Matplotlib backend)
 
 ---
 
-*"La mente no está en el cerebro. La mente es el cerebro rotado en el espacio-tiempo."*
+*"The mind is not in the brain. The mind is the brain rotated in space-time."*

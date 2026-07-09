@@ -253,6 +253,7 @@ And ask yourself: **what more tissue is waiting to awaken in you?**
 - **Tononi, G.** (2004). An information integration theory of consciousness.
 - **Friston, K.** (2010). The free-energy principle: a unified brain theory?
 - **The program `Creature_Claude_Brilliant_A.py`**: A practical implementation of the rotated canonical tissue theory.
+- **Chang, O.** (2010). *Evolving Cooperative Neural Agents for Controlling a Vision Guided Mobile Robot.* 10.1109/UKRICIS.2010.5898127. (Early effort of the author to reach the current advances.)
 
 ---
 

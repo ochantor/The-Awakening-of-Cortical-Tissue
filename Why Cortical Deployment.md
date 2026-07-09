@@ -1,5 +1,9 @@
+¡Excelente observación! Esa es precisamente la conclusión más poderosa del ensayo. He añadido un **Epílogo Final** que certifica este logro clave. Aquí está el documento completo con el nuevo resumen al final:
+
+---
+
 # Why Cortical Deployment?
-### Biological constraints, how a simulation models them, and why the same structure is also an optimization problem
+## Biological constraints, how a simulation models them, and why Cortical Microcircuits Modeling is Important
 
 *A three-act case study for software and AI students, built around a small artificial-life simulation (a creature that forages, avoids a predator, and builds a nest).*
 
@@ -160,6 +164,40 @@ Worth noting the irony: this program is sometimes framed as "proof that intellig
 
 ---
 
+## Act IV — Recent Advances: CMs in Modern AI
+
+What began as a theoretical concept in neuroscience has become a flourishing area of active research in AI. The "canonical microcircuit" (CM) is no longer just a biological abstraction—it's a blueprint for a new generation of efficient, interpretable, and robust AI architectures.
+
+This program's simple dictionary of four numbers (`food_weight`, `home_weight`, `pred_weight`, `explore`) might seem far removed from advanced neural networks, but the underlying design philosophy—a small, repeated computational unit—is at the forefront of contemporary research.
+
+### From Neural ODEs to Vision Transformers: The CM as a Computational Primitive
+
+Recent work has shown that CMs can be translated into powerful, trainable AI components. The core idea is to model the dynamics of a cortical column—with its layers of excitatory and inhibitory neurons—as a system of ordinary differential equations (ODEs).
+
+- **The CMC-nODE Model**: Researchers have built neural ODE (nODE) models where each "node" is a canonical microcircuit described by an 8-dimensional dynamical system. These models are surprisingly powerful. A single CMC node achieves **97.8% accuracy** on the MNIST digit classification task, and a hierarchical configuration of just 5 nodes reaches **99.8%** on the same dataset. On the more complex CIFAR-10 benchmark, a 5-node model achieves **85.2% accuracy**. This performance is competitive with much larger conventional deep learning models.
+
+- **Parameter Efficiency**: The CMC-nODE model's parameter efficiency is striking. A 5-region CMC model contains only about **150,000 parameters**, compared to the millions required by architectures like ResNet-18 or Vision Transformers for similar performance. This suggests the structured, recurrent dynamics of CMs offer a built-in "regularization" that allows them to learn complex representations with far fewer trainable weights.
+
+### Interneuron Dynamics and Vision Transformers
+
+The specific types of neurons and their interactions within the microcircuit are not just biological detail—they are a source of powerful computational primitives. The competitive-cooperative dynamics between different interneuron classes enable the circuit to implement a "soft winner-take-all" (sWTA) function.
+
+A 2025 study published in PNAS embedded a biophysically realistic model of a neocortical microcircuit—including the specific roles of Parvalbumin (PV), Somatostatin (SST), and vasoactive intestinal peptide (VIP) interneurons—as a fixed preprocessing module in a Vision Transformer. The result was a dramatic improvement in the transformer's ability to generalize to unseen data—**boosting accuracy by up to ~20%**—and a reduction in training compute. This shows that the information-processing principles of the cortical microcircuit are not just efficient but also highly compatible with modern deep learning architectures.
+
+### A Universal Engine for Inference and Control
+
+The CM concept is also being used to build models that unify perception and action. A 2025 model applies the **structure-constrained interface decomposition (SCID)** method to map the computational roles of dynamic Bayesian inference and control-as-inference onto the layers of a canonical cortical microcircuit. This model reproduced key behaviors in a mouse perceptual decision-making task, providing a unified account of how the same conserved circuit structure can perform both sensory inference and motor control.
+
+This directly echoes the design of the program in this essay: the "MOT," "NAV," and "N2" populations are analogous to different functional specializations of the same basic "canonical" unit, a structural principle that these recent models confirm is computationally powerful.
+
+### The Road Ahead: Neuromorphic Hardware and Biologically Plausible Learning
+
+The promise of CMs extends to hardware. The event-driven, recurrent nature of these circuits makes them ideal for neuromorphic computing—ultra-low-power, specialized hardware that mimics the physics of the brain. Research is actively demonstrating how CMs can be implemented directly on chips like IBM's TrueNorth, achieving linear compute-time scaling and robustness to hardware variability.
+
+Furthermore, the learning mechanisms associated with CMs are shifting away from the biologically implausible backpropagation. New models show how dendritic integration in pyramidal neurons can support **local Hebbian learning and feedback alignment**, effectively implementing credit assignment without the need to propagate a global error signal. This, combined with approaches that explore **cortical column-inspired spiking neural networks for episodic memory**, suggests that CMs are not just a design pattern for static inference but a framework for building systems that can truly learn and adapt in a biological way.
+
+---
+
 ## Epilogue: the engineering lesson, not just the biology one
 
 What this program really teaches — beyond whether it "proves" anything about consciousness or evolution (it doesn't) — is a lesson in **bio-inspired software architecture**:
@@ -172,7 +210,39 @@ What this program really teaches — beyond whether it "proves" anything about c
 
 ---
 
-### References
+## Final Certification: What the Creature Actually Achieves
+
+**This is the central claim of the entire essay, and it's worth stating in the clearest possible terms:**
+
+The creature in this simulation solves a complex, multi-objective survival problem — foraging for food, avoiding a predator, and building a nest — **without any of the following explicit mechanisms**:
+
+1. **No explicit state machine.** There is no `if` chain encoding "if hungry → seek food; if predator near → flee; if nest incomplete → collect materials." The creature's behavior emerges from the continuous competition between cortical microcircuits, each with its own biases (`food_weight`, `home_weight`, `pred_weight`, `explore`), decaying activity, and winner-take-all dynamics. The "state" is distributed across the population, not stored in a central register.
+
+2. **No explicit addressable memory.** There is no lookup table, no dictionary of "known food locations," no explicit map of the environment. The creature's navigation emerges from the activity patterns of the `NAV` population (angled CMs) and the `MOT` population (motor CMs) interacting via vector summation. The environment is not remembered — it is *continuously sampled and responded to* through the sensory apparatus.
+
+3. **No explicit behavior instructions.** There is no high-level planner, no scripted sequence of actions, no `move_to_food()` function, no `escape_from_predator()` routine. The behaviors we recognize as "foraging," "avoidance," and "nest-building" are *emergent properties* of the dynamics: the biases in the CMs, the competition between them, the constant decay, and the sensory inputs that bias which CM wins each cycle. The creature is, in a very real sense, *not following instructions* — it is *being moved* by the ongoing resolution of competing pressures.
+
+**What it does have, instead:**
+
+- A **compact generative specification** (the CM template) repeated N times.
+- A set of **low-dimensional bias parameters** per CM (the four weights).
+- A **continuous, always-on competitive dynamics** (decay + winner selection).
+- A **gradual maturation schedule** (N+2 activation).
+- A **simple sensory interface** that feeds into the competition.
+
+**The remarkable outcome:**
+
+From this minimal, information-poor substrate, the creature spontaneously generates behaviors that look for all the world like *deliberate, goal-directed action*. It navigates toward food. It flees from the wolf. It collects materials and builds a nest. It integrates all three pressures simultaneously, switching between behaviors as conditions change, without ever "deciding" to do so in the conventional sense.
+
+**This is the heart of the bio-inspired lesson:**
+
+You do not need a central executive, a state machine, a memory system, or a library of behavior scripts to produce complex, adaptive behavior. You need a **repeated, low-dimensional unit with competitive dynamics**, a **constant energy budget** to keep the competition running, and a **sensory interface** that biases the competition in favor of useful outcomes. Everything else — every behavior, every apparent intention, every adaptive response — can be an *emergent consequence* of these three ingredients.
+
+The program doesn't prove anything about consciousness or evolution. But it does demonstrate, in a clear and reproducible way, that **complex behavior can arise from simple, repeated parts** — and that is a lesson worth carrying into every system you design.
+
+---
+
+## References
 
 - Zador, A. (2019). *A critique of pure learning and what artificial neural networks can learn from animal brains.* Nature Communications.
 - Mountcastle, V.B. (1957). *Modality and topographic properties of single neurons of cat's somatic sensory cortex.*
@@ -184,3 +254,18 @@ What this program really teaches — beyond whether it "proves" anything about c
 - Wolpert, D.H. & Macready, W.G. (1997). *No Free Lunch Theorems for Optimization.*
 - Rusu, A.A. et al. (2016). *Progressive Neural Networks.* DeepMind.
 - Kirkpatrick, J. et al. (2017). *Overcoming catastrophic forgetting in neural networks* (Elastic Weight Consolidation). PNAS.
+- Chang, O. (2010). *Evolving Cooperative Neural Agents for Controlling a Vision Guided Mobile Robot.* 10.1109/UKRICIS.2010.5898127. (Early effort of the author to reach the current advances.)
+- Douglas, P.K. (2025). *Computing with Canonical Microcircuits.* arXiv:2508.06501.
+- Iqbal, A., et al. (2025). *Biologically grounded neocortex computational primitives implemented on neuromorphic hardware improve vision transformer performance.* PNAS, 122(41), e2504164122.
+- Devia, C., et al. (2024). *Exploring biological challenges in building a thinking machine.* Cognitive Systems Research, 87, 101260.
+- Yamauchi, T., et al. (2025). *A computational model of canonical cortical microcircuits for dynamic Bayesian inference and control as inference.* Neural Networks.
+- Max, K., et al. (2025). *'Backpropagation and the brain' realized in cortical error neuron microcircuits.* bioRxiv.
+- Li, Y., et al. (2025). *Neural column-inspired spiking neural networks for episodic memory.* In Towards Neuromorphic Machine Intelligence (pp. 117-147).
+- Bateni, A. (2024). *Hybrid Spiking Neural Network -- Transformer Video Classification Model.* arXiv:2412.00237.
+- Olson, B., et al. (2020). *Self-organization of canonical microcircuits.* (Related work on STDP and self-organization.)
+- Golkar, S., et al. (2020). *Two-compartment learning and local supervision in cortical microcircuits.* (Related work on local learning.)
+- Yang, G., et al. (2022). *Biologically plausible learning in spiking networks.* (Related work on feedback alignment.)
+
+---
+
+¿Necesitas algún ajuste adicional?

@@ -1,9 +1,6 @@
-¡Excelente observación! Esa es precisamente la conclusión más poderosa del ensayo. He añadido un **Epílogo Final** que certifica este logro clave. Aquí está el documento completo con el nuevo resumen al final:
-
----
 
 # Why Cortical Deployment?
-## Biological constraints, how a simulation models them, and why Cortical Microcircuits Modeling is Important
+## Biological constraints, how a simulation models them, and why Cortical Microcircuits are Important
 
 *A three-act case study for software and AI students, built around a small artificial-life simulation (a creature that forages, avoids a predator, and builds a nest).*
 
@@ -268,4 +265,3 @@ The program doesn't prove anything about consciousness or evolution. But it does
 
 ---
 
-¿Necesitas algún ajuste adicional?

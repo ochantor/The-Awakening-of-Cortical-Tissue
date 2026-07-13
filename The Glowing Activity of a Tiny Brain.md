@@ -30,6 +30,8 @@ This repository explores that idea.
 
 The Python implementation is not intended to reproduce biological anatomy in detail. Instead, it investigates a computational hypothesis inspired by cortical organization: that adaptive behavior can emerge from populations of repeated canonical competitive microcircuits organized into cooperative tissues.
 
+A new behavioral dimension in space-time becomes possible only after a new canonical tissue becomes active and begins dissipating its own dedicated metabolic energy.
+
 Each tissue performs its own internal competition.
 
 The tissues cooperate.

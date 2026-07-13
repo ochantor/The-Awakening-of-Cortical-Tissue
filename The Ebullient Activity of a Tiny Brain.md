@@ -1,4 +1,4 @@
-# The Creature and the Ebullient Map of Its Tiny Brain
+# The Creature and the Glowing Map of Its Tiny Brain
 
 Imagine a creature born into a world where nothing is explained.
 

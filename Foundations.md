@@ -1,9 +1,9 @@
----
 
 # Mathematical Foundations of the Rotated Canonical Tissue Theory
 
 ## A Formal Framework for Intelligence Without Learning
 
+*New degrees of behavioral freedom require new channels of energy dissipation.*
 ---
 
 ## I. The Core Mathematical Objects
@@ -115,8 +115,8 @@ $$
 
 The winner receives an activity boost:
 
-$$
-a_{k^{*}}(t+1) \leftarrow a_{k^{*}}(t+1) + \Delta
+$$ 
+a_{k^{\ast}}(t+1) \leftarrow a_{k^{\ast}}(t+1) + \Delta
 $$
 
 Where $\Delta$ is the excitation increment.

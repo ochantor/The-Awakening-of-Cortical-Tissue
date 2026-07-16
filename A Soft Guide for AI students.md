@@ -1,6 +1,6 @@
 # Why Is This Cortical-like Deployment Code So Special?
 
-*A tour through the engineering ideas hidden inside a few hundred lines of Python that imitate biological brains deployment and sucessful Performance.*
+*A tour through the engineering ideas hidden inside a few hundred lines of Python that explore an engineering architecture inspired by how biological systems reuse and deploy neural motifs.*
 
 ---
 
@@ -41,6 +41,7 @@ The creature has a genome. That genome is small. It has to be small, because it 
 But here's the problem: the genome is tiny compared to the brain it has to build.
 
 A human genome contains about 750 megabytes of information. The human brain contains about one hundred trillion synaptic connections. There is no way to specify each connection individually. The arithmetic simply fails.
+The genome contains far less explicit information than the complete connectivity pattern of the adult brain.
 
 Evolution faced this problem billions of years ago. It couldn't build a brain by describing it. It had to build a brain by describing something much smaller that, when deployed many times, grows into a brain.
 
@@ -50,7 +51,7 @@ Think of it this way: if you had to build the city of Montreal, but all you had 
 
 That's what this code does. It doesn't describe the creature's behavior directly. It describes a small unit — the canonical microcircuit — and then deploys it across three cortical areas, each with twenty-five copies. The behavior emerges from the interaction of all those copies.
 
-This is the genomic bottleneck, and every brain that has ever existed had to be born from a workaround, not a blueprint. The workaround: don't specify every connection. Specify a compact, repeatable rule — build this one small unit, and repeat it — and let repetition generate a structure far larger than the instructions describing it. Compression, with algorithmic decompression. A fractal, not a floor plan.
+This is the genomic bottleneck, and every brain that has ever existed had to be born from a workaround, not a blueprint. The workaround: don't specify every connection. Specify a compact, repeatable rule — build this one small unit, and repeat it — and let repetition generate a structure far larger than the instructions describing it. Compression, with algorithmic decompression. A fractal construction, not a floor plan.
 
 ---
 
@@ -86,7 +87,7 @@ The same mold produces seventy-five individuals, each with its own personality, 
 
 This is not a bug. It is the whole point.
 
-In biology, this is called canonical deployment. The genome doesn't describe every neuron. It describes a small circuit that gets deployed many times across different cortical areas, each copy slightly adjusted to its location and function. A few pages of genetic code produce a brain of immense complexity not because the code contains more information but because the same information is used over and over again.
+This can be interpreted as a form of canonical deployment: a repeated developmental motif that generates diverse functional circuits. The genome doesn't describe every neuron. It describes a small circuit that gets deployed many times across different cortical areas, each copy slightly adjusted to its location and function. A few pages of genetic code produce a brain of immense complexity not because the code contains more information but because the same information is used over and over again.
 
 ---
 

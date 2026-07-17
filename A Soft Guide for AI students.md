@@ -7,7 +7,7 @@
 
 ## 1. The First Question
 
-When software students first open this program, they usually have the same reaction.
+When software and AI students first open this program, they usually have the same reaction.
 
 Nothing looks familiar.
 

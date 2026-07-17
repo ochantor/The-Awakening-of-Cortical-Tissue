@@ -59,13 +59,14 @@ This is the genomic bottleneck, and every brain that has ever existed had to be 
 
 Most programmers spend years trying to eliminate duplicated code. So why does this program intentionally create three separate functional populations, each with twenty-five nearly identical computational units?
 
-At first this looks like poor software engineering. In reality, it is the central idea of the entire architecture.
+At first this looks like poor software engineering. In reality, it is the central idea of the entire architecture and how nature deploys resourses in the cortex.
 
 Each unit within a population is almost identical. What distinguishes one from another is not its algorithm but its parameters.
 
 * In the **motor population**, one unit slightly prefers food, another prefers home, another reacts more strongly to predators.
 * In the **navigation population**, units respond to borders and explore.
 * In the **construction population**, units respond to materials and the nest.
+* In the **prefered motion direction**, units respond to where to move.
 
 Individually these differences are insignificant. Collectively they create populations capable of representing many competing behavioral tendencies without requiring seventy-five different algorithms.
 
@@ -88,7 +89,7 @@ Four numbers. That's the entire description of one unit. The program then stamps
 
 The same mold produces seventy-five individuals, each with its own personality, organized into three functional populations. This is not a bug. It is the whole point.
 
-> **A note on terminology:** Throughout this essay, we use terms like "genome," "evolution," and "cortical" as *analogies* to biology. The code does not implement a real genome (there is no inheritance across generations), nor real evolution (the parameters are randomly initialized, not selected), nor real cortical columns (there are no lateral connections or hierarchical structure). These analogies help us think about the architecture, but they are not literal simulations. The code is *inspired by* biology, not *replicating* it.
+> **A note on terminology:** Throughout this essay, we use terms like "genome," "evolution," and "cortical" as *analogies* to biology. The code does not implement a real genome (there is no inheritance across generations), nor real evolution (some parameters are randomly initialized, some are spatily rotated, structure is inherited, not selected), nor real cortical columns (there are no lateral connections or hierarchical structure). These analogies help us think about the architecture, but they are not literal simulations. The code is *inspired by* biology, not *replicating* it.
 
 This can be interpreted as a form of canonical deployment: a repeated developmental motif that generates diverse functional circuits. The genome doesn't describe every neuron. It describes a small circuit that gets deployed many times across different populations, each copy slightly adjusted to its location and function. A few pages of genetic code produce a brain of immense complexity not because the code contains more information but because the same information is used over and over again.
 

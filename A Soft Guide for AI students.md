@@ -1,4 +1,3 @@
-
 # Why Is This Cortical-like Deployment Code So Special?
 
 *A tour through the engineering ideas hidden inside a few hundred lines of Python that explore an architecture inspired by how biological systems reuse and deploy neural motifs.*
@@ -15,7 +14,7 @@ There is no planner. No behavior tree. No reinforcement learning. No search algo
 
 In fact, many of the ingredients that modern AI textbooks consider indispensable are simply missing.
 
-Instead, the program contains something almost embarrassingly small: three functional populations with twenty-five nearly identical computational modules (cortical microcircuits CMs) each, arranged in three separate rings. Each CM stores only a handful of numerical parameters. Every simulation step they all wake up, compute an activation, compete with one another, and then quietly decay before repeating the entire process a fraction of a second later.
+Instead, the program contains something almost embarrassingly small: three functional populations with twenty-five nearly identical computational modules (cortical microcircuits or CMs) each, arranged in three separate rings. Each CM stores only a handful of numerical parameters. Every simulation step they all wake up, compute an activation, compete with one another, and then quietly decay before repeating the entire process a fraction of a second later.
 
 At first glance this seems like an unnecessarily complicated way to decide whether a creature should walk north or south.
 
@@ -35,7 +34,7 @@ This essay is therefore not a tutorial on Python. It is a tour through the engin
 
 Let's start with something the code doesn't show you directly, but which explains almost everything it does.
 
-The creature has a genome. That genome is small. It has to be small, because it has to fit inside a single cell. That cell divides and grows into the creature, and somewhere along the way, the genome has to specify how to build the creature's brain.
+The creature has a genome (in this implementation, a set of inherited parameters that are spatially deployed, not a literal DNA sequence). That genome is small. It has to be small, because it has to fit inside a single cell. That cell divides and grows into the creature, and somewhere along the way, the genome has to specify how to build the creature's brain.
 
 But here's the problem: the genome is tiny compared to the brain it has to build.
 
@@ -59,14 +58,14 @@ This is the genomic bottleneck, and every brain that has ever existed had to be 
 
 Most programmers spend years trying to eliminate duplicated code. So why does this program intentionally create three separate functional populations, each with twenty-five nearly identical computational units?
 
-At first this looks like poor software engineering. In reality, it is the central idea of the entire architecture and how nature deploys resourses in the cortex.
+At first this looks like poor software engineering. In reality, it is the central idea of the entire architecture and how nature deploys resources in the cortex.
 
 Each unit within a population is almost identical. What distinguishes one from another is not its algorithm but its parameters.
 
 * In the **motor population**, one unit slightly prefers food, another prefers home, another reacts more strongly to predators.
 * In the **navigation population**, units respond to borders and explore.
 * In the **construction population**, units respond to materials and the nest.
-* In the **prefered motion direction**, units respond to where to move.
+* In the **preferred motion direction**, units respond to where to move.
 
 Individually these differences are insignificant. Collectively they create populations capable of representing many competing behavioral tendencies without requiring seventy-five different algorithms.
 
@@ -82,14 +81,13 @@ one CM ("canonical microcircuit") =
     home_weight ~ small random number
     pred_weight ~ small random number
     explore     ~ small random number
-
 ```
 
 Four numbers. That's the entire description of one unit. The program then stamps out twenty-five copies for the motor population, each one slightly different because of the random initialization. Then it does the same for the navigation population with different parameters. Then again for the construction population.
 
 The same mold produces seventy-five individuals, each with its own personality, organized into three functional populations. This is not a bug. It is the whole point.
 
-> **A note on terminology:** Throughout this essay, we use terms like "genome," "evolution," and "cortical" as *analogies* to biology. The code does not implement a real genome (there is no inheritance across generations), nor real evolution (some parameters are randomly initialized, some are spatily rotated, structure is inherited, not selected), nor real cortical columns (there are no lateral connections or hierarchical structure). These analogies help us think about the architecture, but they are not literal simulations. The code is *inspired by* biology, not *replicating* it.
+> **A note on terminology:** Throughout this essay, we use terms like "genome," "evolution," and "cortical" as *analogies* to biology. The code does not implement a real genome (there is no inheritance across generations), nor real evolution (some parameters are randomly initialized, some are spatially rotated, structure is inherited, not selected), nor real cortical columns (there are no lateral connections or hierarchical structure). These analogies help us think about the architecture, but they are not literal simulations. The code is *inspired by* biology, not *replicating* it.
 
 This can be interpreted as a form of canonical deployment: a repeated developmental motif that generates diverse functional circuits. The genome doesn't describe every neuron. It describes a small circuit that gets deployed many times across different populations, each copy slightly adjusted to its location and function. A few pages of genetic code produce a brain of immense complexity not because the code contains more information but because the same information is used over and over again.
 
@@ -114,7 +112,6 @@ Look at the execution logic:
 ```python
 activity *= 0.92         # every copy loses a little strength, every frame
 activity[winner] += 1.0  # and one copy always wins, every frame
-
 ```
 
 This never pauses. There is no gate. The competition runs whether the creature is one step from a predator or standing in an empty field doing nothing in particular.
@@ -147,10 +144,11 @@ def relajar_softmax(actividad, energias, alpha, temperatura):
     pesos = np.exp(e / temperatura)
     objetivo = pesos / np.sum(pesos)
     return (1.0 - alpha) * actividad + alpha * objetivo
-
 ```
 
 This function takes the current activity levels and the new sensory energies, and moves the activity smoothly toward the distribution that best matches the current world state. No single copy is ever declared the winner. The activity is always a distribution across the population.
+
+> **A note on "energy":** When we say the system "burns energy," we mean the computational activity itself — the softmax dynamics, the decay, the competition. In this model, activity is the currency. There is no explicit metabolic cost variable, but the metaphor captures the idea that computation is continuous and dissipative, not a one-off function call. The system is always active, always consuming "computational energy" in the form of ongoing dynamics.
 
 This is **population coding**. The direction the creature moves is not determined by any single copy. It is the vector average of all active copies across all populations, weighted by their current activity. The creature moves in the direction that emerges from the collective competition across all three functional populations.
 
@@ -167,14 +165,12 @@ The creature in its early moments is not able to build a nest. That capability d
 ```python
 if age > AWAKENING_AGE and not build_awake:
     build_awake = True
-
 ```
 
 The third population — the construction population, labeled `N+2` in the code — has been present but silent, without permission to act. When it wakes, it doesn't overwrite anything. It blends in, with a share of the vote that grows slowly over time.
 
 ```python
 primary_motor = (1 - weight_n2) * old_motor + weight_n2 * new_motor
-
 ```
 
 The old motor and navigation populations are never touched. Not one of their numbers changes. The new population simply starts contributing a small, growing fraction of the final decision.
@@ -187,7 +183,7 @@ There's a deeper reason this matters too. If the new population had to learn nes
 
 The competence was paid for somewhere else. The creature just switches it on.
 
-In biology, this mirrors **myelination** — the process that lets neural circuits fire efficiently continues well into adulthood, arriving late and gradually rather than all at once. New capabilities appear not by rewriting existing circuits but by adding new circuits alongside them. It also mirrors the idea of critical periods, though with an important simplification: in this code, the gate is purely age-based, whereas in biology critical periods often require both age and appropriate sensory experience during the window.
+In biology, this mirrors **myelination** — the process that lets neural circuits fire efficiently continues well into adulthood, arriving late and gradually rather than all at once. New capabilities appear not by rewriting existing circuits but by adding new circuits alongside them. It also mirrors the idea of critical periods, though with an important simplification: in this code, the gate is purely age-based, whereas in biology critical periods often require both age *and* appropriate sensory experience during the window. This is an important difference: in the code, the gate opens on a timer regardless of experience. In biology, experience during the window is often necessary for proper wiring. This simplification makes the system easier to implement, but it's a simplification worth noting.
 
 ---
 
@@ -201,7 +197,6 @@ Consider the creature's load. In the original version, it had a boolean flag `ti
 
 ```python
 L = np.clip(L + dt * (flujo_entrada - flujo_salida), 0, 1)
-
 ```
 
 The creature is not either "carrying" or "not carrying." It is gradually filling and emptying, like a cup being filled with water and poured out. This allows the behavior to be smooth rather than binary.
@@ -210,7 +205,6 @@ The same principle applies to the maturation trigger. Instead of a boolean flag 
 
 ```python
 instinto_construccion = _compuerta(edad - EDAD_DESPIERTE, filo=RHO_MADURACION)
-
 ```
 
 The creature doesn't suddenly wake up to the possibility of nest-building. It gradually becomes more aware of it, over time, as the sigmoid moves from 0 to 1.
@@ -220,7 +214,6 @@ Even the decision of whether to approach the nest or the material is continuous:
 ```python
 g_pickup = _compuerta(PICKUP_RADIUS - dist_material, filo=STEEPNESS_GATE) if material_activo else 0.0
 g_drop = _compuerta(NIDO_RADIUS - dist_nido, filo=STEEPNESS_GATE) if not nido_completado else 0.0
-
 ```
 
 These are soft gates. They don't suddenly activate when the creature is within a certain distance. They gradually increase as the creature gets closer.
@@ -243,6 +236,8 @@ This is probably the most surprising property of the entire program.
 
 Modern AI often accumulates knowledge by adding more memory: more parameters, more layers, more training data. This architecture attempts something different. It asks how far carefully organized competition can go before explicit memory becomes necessary.
 
+> This challenges the assumption that intelligence requires accumulating knowledge. Here, the creature is competent not because it knows more, but because its dynamics are well-tuned to its environment.
+
 Whether that answer ultimately extends to biological intelligence remains an open scientific question. For this small creature, however, the experiment is surprisingly successful.
 
 The creature forages for food. It flees from the wolf. It builds a nest. It does all of this without a map, without a planner, without a decision tree, and without a state machine. What it has instead is three functional populations, each with twenty-five copies of a four-number mold, arranged in rings, competing continuously, with the third population waking up when the time is right.
@@ -253,11 +248,11 @@ The creature forages for food. It flees from the wolf. It builds a nest. It does
 
 Before concluding, it is important to be clear about the limitations of this architecture.
 
-* **This system does not learn in the current ambient:** The weights are fixed from the start (inherited). The creature never updates its parameters based on experience. Behavior is pre-specified dynamics responding to different holographics inputs. This is deployment, not training.
-* **This system has no long-term planning, unless new cortical areas are awaken:** Without a map or sequence memory, the creature cannot plan routes, anticipate future states, or reason about consequences beyond the immediate present. In principle, as proven with N+2, new cortical areas can extend long term planning.
-* **This system mat not not survive to novel environments:** If the creature is placed in a world with different food types, different predators, or different nest-building requirements, it will fail. Its capabilities are fixed at deployment. But its CMs structure may rapidly adapt.
-* **This system has no hierarchical behavior:** All decisions are immediate motor responses to holographic variables. There is no higher-level control that orchestrates sub-goals or sequences of actions. The creature cannot say "first find material, then approach the nest, then build" as a plan; these behaviors emerge from the dynamics but are not explicitly structured.
-* **This system has no lateral connectivity or recurrence:** The three cortical areas are independent except for their blended output. There is no communication between areas, no top-down modulation, and no recurrent loops within areas. This makes the system simpler, resilient and more survival prone, but also perhaps less powerful than a truly recurrent or hierarchical architecture.
+* **This system does not learn in the current ambient:** The weights are fixed from the start (inherited). The creature never updates its parameters based on experience. Behavior is pre-specified dynamics responding to different sensory inputs. This is deployment, not training.
+* **This system has no long-term planning, unless new cortical areas are awakened:** Without a map or sequence memory, the creature cannot plan routes, anticipate future states, or reason about consequences beyond the immediate present. In principle, as proven with N+2, new cortical areas can extend long-term planning.
+* **This system may not survive in novel environments:** If the creature is placed in a world with different food types, different predators, or different nest-building requirements, it will fail. Its capabilities are fixed at deployment. But its CMs structure may rapidly adapt if evolution or learning is introduced.
+* **This system has no hierarchical behavior:** All decisions are immediate motor responses to sensory variables. There is no higher-level control that orchestrates sub-goals or sequences of actions. The creature cannot say "first find material, then approach the nest, then build" as a plan; these behaviors emerge from the dynamics but are not explicitly structured.
+* **This system has no lateral connectivity or recurrence:** The three cortical areas are independent except for their blended output. There is no communication between areas, no top-down modulation, and no recurrent loops within areas. This makes the system simpler, resilient, and more survival-prone, but also perhaps less powerful than a truly recurrent or hierarchical architecture.
 
 These are design choices. The architecture trades generality for simplicity, stability, and interpretability. It is a proof of concept for developmental deployment, not a general solution to all AI problems, so far.
 
@@ -269,17 +264,35 @@ The answer to the original question — *"Why on Earth would anyone write code l
 
 Because specifying behavior directly doesn't scale.
 
-If you tried to write an `if` statement for every situation the creature might encounter now or in future, you would never finish. If you tried to train a neural network on every possible scenario, you would never have enough data nor enough power to modify sinapses. If you tried to build a map of the world, the creature would be helpless in any environment it hadn't memorized.
+If you tried to write an `if` statement for every situation the creature might encounter now or in the future, you would never finish. If you tried to train a neural network on every possible scenario, you would never have enough data nor enough power to modify synapses. If you tried to build a map of the world, the creature would be helpless in any environment it hadn't memorized.
 
 This architecture takes a different approach. It builds a small, repeatable unit and deploys it many times across multiple functional populations. The unit is simple. The deployment is systematic. The behavior emerges from the interaction and energy burn.
 
-This is the same approach that biology discovered billions of years ago and use today to build biological brains, under the severe constraint of the genomic bottleneck. It is the same approach that software engineers use when they write a class and instantiate it many times. It is the same approach that hardware engineers use when they configure an FPGA with replicated logic blocks.
+This is the same approach that biology discovered billions of years ago and uses today to build biological brains, under the severe constraint of the genomic bottleneck. It is the same approach that software engineers use when they write a class and instantiate it many times. It is the same approach that hardware engineers use when they configure an FPGA with replicated logic blocks.
 
 Deployment — not description — is how you build things that are too large to describe.
 
 Evolution discovered this. Biology embodies this. This code demonstrates this.
 
 Now it's your turn to use it.
+
+---
+
+## Getting Started
+
+If you want to explore this code yourself:
+
+1. **Clone the repository** containing the simulation.
+2. **Install the dependencies:** `numpy` and `matplotlib` are the main requirements.
+3. **Run the simulation:** Look for the main loop and observe the creature's behavior.
+4. **Experiment:** Try changing:
+   - The number of CMs per population
+   - The awakening age
+   - The sensory weights
+   - The decay rate
+5. **Visualize:** Plot the activity patterns to see the competition in action.
+
+The code is designed to be modular, so you can easily modify populations, add new sensory modalities, or change the developmental schedule.
 
 ---
 
@@ -300,8 +313,9 @@ This work draws inspiration from:
 * **Goldberg, D. E. (1989).** *Genetic Algorithms in Search, Optimization and Machine Learning.* — Practical GA implementation.
 * **Rusu, A. A., et al. (2016).** *Progressive neural networks.* arXiv preprint arXiv:1606.04671. — Adding new networks without forgetting.
 * **Kirkpatrick, J., et al. (2017).** *Overcoming catastrophic forgetting in neural networks.* Proceedings of the National Academy of Sciences, 114(13), 3521-3526. — Elastic weight consolidation.
-* **Chang, A. (2026).** *vAGI-2026 Reikiavick. Evolving Cooperative Neural Agents.* — The specific codebase this essay explores.
+* **Chang, A. (2026).** *AGI-2026 Reikiavick. Evolving Cooperative Neural Agents.* — The specific codebase this essay explores.
 
 ---
 
 *A tour through the engineering ideas hidden inside a few hundred lines of Python that take inspiration from biological brain deployment.*
+```
